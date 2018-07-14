@@ -1,0 +1,32 @@
+version: '2.2'
+
+networks:
+  br_mgmt:
+    external:
+      name: br-mgmt
+
+services:
+  region-controller:
+    image: region:latest
+    container_name: region
+    restart: always
+    networks:
+      br_mgmt:
+         ipv4_address: 192.168.110.235
+    cpu_count: 2
+    mem_limit: 2G
+    hostname: region.maas
+    privileged: true
+
+  rack-controller:
+    image: rack:latest
+    container_name: rack
+    restart: always
+    networks:
+      br_mgmt:
+         ipv4_address: 192.168.110.236
+    cpu_count: 2
+    mem_limit: 2G
+    hostname: rack.maas
+    privileged: true
+
