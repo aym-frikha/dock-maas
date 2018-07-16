@@ -13,8 +13,6 @@ services:
     networks:
       br_mgmt:
          ipv4_address: 192.168.110.235
-    cpu_count: 2
-    mem_limit: 2G
     hostname: region.maas
     privileged: true
 
@@ -25,8 +23,19 @@ services:
     networks:
       br_mgmt:
          ipv4_address: 192.168.110.236
-    cpu_count: 2
-    mem_limit: 2G
     hostname: rack.maas
     privileged: true
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=maas
+      - POSTGRES_PASSWORD=testpass
+      - POSTGRES_DB=maasd
+    networks:
+      br_mgmt:
+         ipv4_address: 192.168.110.237
+    hostname: postgres.maas
 
